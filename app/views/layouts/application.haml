@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Houseshare
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    %header
+      - if logged_in?
+        %ul
+          %li= current_user.first_name
+          %li= link_to('Logout', sessions_path, :method => :delete)
+      - else
+        = link_to('Login', '/auth/facebook')
+
+    .container
+      = yield
