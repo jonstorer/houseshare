@@ -1,30 +1,26 @@
 module Selectors
-  PATHS = { 'the homepage' => '/' }
-
   SELECTORS = {
-    'the header' => 'header'
   }
 
   def path_for(named_path)
-    PATHS.each do |regex, value|
-      return value if Regexp.new(regex).match(named_path)
+    case named_path
+    when 'the homepage' then '/'
     end
-    return nil
   end
 
-  def css_for(named_path)
-    SELECTORS.each do |regex, value|
-      return value if Regexp.new(regex).match(named_path)
+  def css_for(named_selector)
+    case named_selector
+    when 'the header' then 'header'
+    when /the (.+) for a (.+) field/
+      "[name='#{$2}[#{$1}]']"
     end
-    return nil
   end
 
   def print_warning(named_element)
-    puts """
-    Unknown selector #{named_element}
-    Please add:
-    '#{named_element}' => 'something'
-    """
+    puts "Unknown selector #{named_element}"
+    puts "Please add:"
+    puts "'#{named_element}' => 'something'"
+    puts ""
   end
 
   def selector_for(named_element)

@@ -13,6 +13,8 @@ gem 'omniauth', '1.2.2'
 gem 'omniauth-facebook', '2.0.1'
 gem 'haml', '4.0.6'
 gem 'haml-rails', '0.9.0'
+gem 'simple_form', '3.1.0'
+gem 'bootstrap-sass', '~> 3.3.4.1'
 
 group :development, :test do
   gem 'byebug'
@@ -25,8 +27,9 @@ end
 group :test do
   gem 'cucumber'
   gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
+  gem 'faker'
   gem 'launchy', '2.4.3'
   gem 'rspec-rails', '3.2.1'
-  gem 'database_cleaner'
   gem 'shoulda-matchers', '2.8.0'
 end

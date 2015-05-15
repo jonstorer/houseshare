@@ -10,3 +10,7 @@ Then(/^I should (not )?see "([^"]*)" within (.+)$/) do |negator, text, named_ele
   strategy = !!negator ? :not_to : :to
   expect(page).send strategy, have_css(selector_for(named_element), :text => text)
 end
+
+When(/^I enter "([^"]*)" within (.+)$/) do |text, named_element|
+  fill_in selector_for(named_element), :with => text
+end

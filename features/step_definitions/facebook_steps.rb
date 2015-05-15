@@ -14,8 +14,21 @@ FACEBOOK_AUTH_HASH = {
   }
 }
 
+def auth_hash
+  hash = OmniAuth::AuthHash.new FACEBOOK_AUTH_HASH
+  hash.info.first_name = Faker::Name.first_name
+  hash.info.last_name = Faker::Name.last_name
+  hash.info.email = Faker::Internet.safe_email([hash.info.first_name, hash.info.first_name].join('-'))
+  hash
+end
+
 Given(/^I am logged into facebook as:$/) do |table|
-  hash = FACEBOOK_AUTH_HASH
-  hash[:info][:first_name] = table.hashes.first['first name']
+  hash = auth_hash
+  hash.info.first_name = table.hashes.first['first name']
   OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(hash)
+end
+
+Given(/^I am logged in$/) do
+  OmniAuth.config.mock_auth[:facebook] = auth_hash
+  visit('/auth/facebook')
 end
